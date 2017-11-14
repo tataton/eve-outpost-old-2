@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-require('dotenv').config();
 const helmet = require('helmet');
 const axios = require('axios');
 const passport = require('passport');
 const session = require('express-session');
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 const sessionStore = require('./server/services/service-database').SessionStore;
 

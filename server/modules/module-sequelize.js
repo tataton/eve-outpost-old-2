@@ -11,11 +11,12 @@ const sqlizeObject = process.env.DATABASE_URL
             port: process.env.DB_PORT,
             dialect: 'postgres',
             logging: false,
-            operatorsAliases: false,
-            dialectOptions: {
-                ssl: true
-            }
+            operatorsAliases: false
         };
+
+if (process.env.DB_SSL) {
+    sqlizeObject.dialectOptions = {ssl: true}
+}
 
 const sequelize = new Sequelize(sqlizeObject);
 
