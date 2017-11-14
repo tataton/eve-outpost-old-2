@@ -1,7 +1,38 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+require('dotenv').config();
+const helmet = require('helmet');
 const axios = require('axios');
+const passport = require('passport');
+const session = require('express-session');
+
+const sessionStore = require('./server/services/service-database').SessionStore;
+
+const sessionObject = {
+    secret: process.env.SESSION_SECRET,
+    name: process.env.COOKIE_NAME,
+    store: sessionStore,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {}
+};
+
+/* Need to figure out how to use this correctly:
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sessionObject.cookie.secure = true // serve secure cookies
+}
+*/
+
+app.use(helmet());
+app.use(session(sessionObject));
+app.use(passport.initialize());
+app.use(passport.session());
+
+/** ---------- ROUTES ---------- **/
+const auth = require('./server/routes/route-auth');
+app.use('/auth', auth);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -24,7 +55,5 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT);
-
-console.log(`Server listening on ${PORT}`);
+app.listen(process.env.PORT);
+console.log(`Server listening on port ${process.env.PORT}.`);
