@@ -22,7 +22,6 @@ router.get('/write/callback', passport.authenticate('oauth2-write', {failureRedi
 
 router.get('/getuserinfo', (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('req.session.passport.user', req.session.passport.user);
         res.send(
             {
                 characterID: req.session.passport.user.character.CharacterID,
@@ -36,6 +35,7 @@ router.get('/getuserinfo', (req, res) => {
 
 router.get('/logout', (req, res) => {
     req.logout();
+    req.session.destroy();
     res.redirect('/');
 });
 
