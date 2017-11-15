@@ -2,7 +2,9 @@ import React from 'react';
 
 const Market = () => {
     return (
-        <h1>Market Page</h1>
+        <h1>
+            Market Page
+        </h1>
     )
 };
 
