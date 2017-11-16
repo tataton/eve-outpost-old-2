@@ -6,8 +6,8 @@ const OAuth2Strategy = require('passport-oauth2');
 const axios = require('axios');
 const AUTH_URL = 'https://login.eveonline.com/oauth/authorize';
 const TOKEN_URL = 'https://login.eveonline.com/oauth/token';
-const READ_AUTH_CALLBACK_URL = `${process.env.CALLBACK_PROTOCOL}://${process.env.FQDN}/auth/read/callback`;
-const WRITE_AUTH_CALLBACK_URL = `${process.env.CALLBACK_PROTOCOL}://${process.env.FQDN}/auth/write/callback`;
+const READ_AUTH_CALLBACK_URL = `${process.env.CALLBACK_PROTOCOL}://${process.env.CALLBACK_FQDN}/auth/read/callback`;
+const WRITE_AUTH_CALLBACK_URL = `${process.env.CALLBACK_PROTOCOL}://${process.env.CALLBACK_FQDN}/auth/write/callback`;
 const WRITE_AUTH_SCOPES = ['esi-assets.read_assets.v1', 'esi-markets.read_character_orders.v1'];
 const AUTH_VERIFY_URL = 'https://login.eveonline.com/oauth/verify';
 

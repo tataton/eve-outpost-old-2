@@ -5,7 +5,9 @@ const express = require('express');
 const router = express.Router();
 const passport = require('../modules/module-passport');
 
-router.get('/read/login', passport.authenticate('oauth2-read'));
+router.get('/read/login', passport.authenticate('oauth2-read'), () => {
+    console.log("auth/read/login route hit.")
+});
 router.get('/write/login', passport.authenticate('oauth2-write'));
 
 router.get('/read/callback', passport.authenticate('oauth2-read', {failureRedirect: '/'}), (req, res) => {

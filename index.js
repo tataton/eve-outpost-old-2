@@ -71,7 +71,6 @@ app.get('/', (req, res) => {
 
 // The "catchall" handler: for any initial request that doesn't
 // match one above, send back to home route.
-
 app.get('*', (req, res) => {
     res.redirect('/');
 });

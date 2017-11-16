@@ -2,4 +2,6 @@ node_modules
 .DS_Store
 npm-debug.log
 /client/build
-/*.env
+.env
+.env.development
+.env.staging
