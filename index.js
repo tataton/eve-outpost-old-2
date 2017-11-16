@@ -29,7 +29,8 @@ const sessionObject = {
     name: process.env.COOKIE_NAME,
     store: new redisStore(redisStoreObject),
     saveUninitialized: true,
-    resave: false
+    resave: false,
+    cookie: {}
 };
 
 if (process.env.NODE_ENV == 'production') {
