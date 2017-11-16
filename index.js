@@ -16,14 +16,12 @@ if (process.env.NODE_ENV !== 'production') {
 const redisStoreObject = process.env.REDIS_URL
     ?   {
             url: process.env.REDIS_URL,
-            client: redisClient,
-            ttl: (24 * 60 * 60)  // 24 hours
+            client: redisClient
         }
     :   {
             host: process.env.REDIS_HOST,
             port: parseInt(process.env.REDIS_PORT, 10),
-            client: redisClient,
-            ttl: (24 * 60 * 60)  // 24 hours
+            client: redisClient
         };
 
 const sessionObject = {
@@ -31,11 +29,7 @@ const sessionObject = {
     name: process.env.COOKIE_NAME,
     store: new redisStore(redisStoreObject),
     saveUninitialized: true,
-    resave: false,
-    cookie: {
-        httpOnly: true,
-        maxAge: (24 * 60 * 60 * 1000)  // 24 hours
-    }
+    resave: false
 };
 
 if (process.env.NODE_ENV == 'production') {
