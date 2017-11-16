@@ -30,7 +30,7 @@ const sessionObject = {
     secret: process.env.SESSION_SECRET,
     name: process.env.COOKIE_NAME,
     store: new redisStore(redisStoreObject),
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     cookie: {
         httpOnly: true,
