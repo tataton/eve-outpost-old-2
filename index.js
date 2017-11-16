@@ -16,7 +16,8 @@ if (process.env.NODE_ENV !== 'production') {
 const redisStoreObject = process.env.REDIS_URL
     ?   {
             url: process.env.REDIS_URL,
-            client: redisClient
+            client: redisClient,
+            logErrors: true
         }
     :   {
             host: process.env.REDIS_HOST,
