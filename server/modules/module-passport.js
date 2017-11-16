@@ -13,20 +13,6 @@ const AUTH_VERIFY_URL = 'https://login.eveonline.com/oauth/verify';
 
 const User = require('../services/service-database').User;
 
-passport.serializeUser((user, done) => {
-    /* For now, serializing entire user object. In the future,
-    better to just serialize some user id property. */
-    done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-    /* If additional details about user account are needed
-    attached to the session, incorporate database call
-    here. Currently, EVE SSO server gives us all the info
-    we need. */
-    return done(null, user);
-});
-
 passport.use('oauth2-read', new OAuth2Strategy(
     {
         authorizationURL: AUTH_URL,
@@ -108,5 +94,19 @@ passport.use('oauth2-write', new OAuth2Strategy({
         .catch(err => {return cb(err)});
     }
 ));
+
+passport.serializeUser((user, done) => {
+    /* For now, serializing entire user object. In the future,
+    better to just serialize some user id property. */
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    /* If additional details about user account are needed
+    attached to the session, incorporate database call
+    here. Currently, EVE SSO server gives us all the info
+    we need. */
+    return done(null, user);
+});
 
 module.exports = passport;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Image, Button, Container } from 'semantic-ui-react';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import loginButton from '../../images/loginButton.png';
 import logo from '../../images/logo.png';
 
@@ -40,26 +40,6 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
         }
     };
 
-
-    return (
-        <Container>
-            <Menu fixed='top' inverted>
-                <Menu.Item header>
-                    <Image 
-                        size='mini'
-                        src={logo}
-                        style={{ marginRight: '1.5em' }}
-                    />
-                    EVE Outpost
-                </Menu.Item>
-                <Menu.Item as='a' href='/'>Home</Menu.Item>
-                <Menu.Item as='a' href='/market'>Market Viewer</Menu.Item>
-                {rightMenuItems()}
-            </Menu>
-        </Container>
-    )
-
-/*
     return (
         <Container>
             <Menu fixed='top' inverted>
@@ -77,8 +57,6 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
             </Menu>
         </Container>
     )
-*/
-
 };
 
 export default FixedMenu;

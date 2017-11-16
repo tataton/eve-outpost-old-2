@@ -32,7 +32,6 @@ const sessionObject = {
     store: new redisStore(redisStoreObject),
     saveUninitialized: false,
     resave: false,
-    unset: 'destroy',
     cookie: {
         httpOnly: true,
         maxAge: (24 * 60 * 60 * 1000)  // 24 hours
@@ -41,9 +40,16 @@ const sessionObject = {
 
 if (process.env.NODE_ENV == 'production') {
     app.set('trust proxy', 1);
-    sessionObject.proxy = true,
+    sessionObject.proxy = true;
     sessionObject.cookie.secure = true
+} else if (process.env.NODE_ENV == 'development') {
+    // Not sure if we need this. Create-React-App dev server
+    // does set up a proxy, but it's not clear whether it impacts
+    // Express.
+    app.set('trust proxy', 1);
+    sessionObject.proxy = true
 }
+// Otherwise, if process.env.NODE_ENV == 'staging', we do nothing.
 
 app.use(helmet());
 app.use(session(sessionObject));
