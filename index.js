@@ -22,6 +22,7 @@ if (process.env.REDIS_URL) {
         redisClientObject.password = process.env.REDIS_PASSWORD
     }
 }
+
 const redisClient = redis.createClient(redisClientObject);
 
 const sessionObject = {
@@ -30,7 +31,10 @@ const sessionObject = {
     store: new redisStore({client: redisClient}),
     saveUninitialized: false,
     resave: false,
-    cookie: {}
+    cookie: {
+        httpOnly: true,
+        maxAge: (24 * 60 * 60 * 1000)
+    }
 };
 
 if (process.env.NODE_ENV == 'production') {

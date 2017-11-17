@@ -11,7 +11,6 @@ router.get('/write/login', passport.authenticate('oauth2-write'));
 router.get('/read/callback', passport.authenticate('oauth2-read', {failureRedirect: '/'}), (req, res) => {
     // May or may not fill this in with params info to pass to React.
     // req.session.passport.user will now contain character info.
-    console.log("Successful read callback.");
     res.redirect('/');
 });
 
@@ -23,7 +22,6 @@ router.get('/write/callback', passport.authenticate('oauth2-write', {failureRedi
 
 router.get('/getuserinfo', (req, res) => {
     if (req.isAuthenticated()) {
-        console.log("Authenticated user.");
         res.send(
             {
                 characterID: req.session.passport.user.character.CharacterID,
@@ -31,7 +29,6 @@ router.get('/getuserinfo', (req, res) => {
             }
         );
     } else {
-        console.log("Un-authenticated user.");
         res.sendStatus(403);
     }
 });

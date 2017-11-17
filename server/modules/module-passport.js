@@ -22,7 +22,6 @@ passport.use('oauth2-read', new OAuth2Strategy(
         callbackURL: READ_AUTH_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, cb) => {
-        console.log("Access token: " + accessToken);
         axios({
             method: 'get',
             url: AUTH_VERIFY_URL,
@@ -30,7 +29,6 @@ passport.use('oauth2-read', new OAuth2Strategy(
         })
         .then(response => response.data)
         .then(character => {
-            console.log("Character: " + character.CharacterName);
             User
                 .findOne({where: {characterID: character.CharacterID}})
                 .then(foundUser => {
