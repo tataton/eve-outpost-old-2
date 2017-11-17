@@ -6,30 +6,29 @@ const axios = require('axios');
 const passport = require('passport');
 const session = require('express-session');
 const redis = require('redis');
-const redisClient = redis.createClient();
 const redisStore = require('connect-redis')(session);
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const redisStoreObject = {client: redisClient};
+const redisClientObject = {};
 if (process.env.REDIS_URL) {
-    const redisURLparse = require('./server/services/service-redisurlparse');
-    Object.assign(redisStoreObject, redisURLparse(process.env.REDIS_URL))
+    redisClientObject.url = process.env.REDIS_URL
 } else {
-    redisStoreObject.host = process.env.REDIS_HOST;
-    redisStoreObject.port = process.env.REDIS_PORT;
+    redisClientObject.host = process.env.REDIS_HOST;
+    redisClientObject.port = process.env.REDIS_PORT;
     if (process.env.REDIS_PASSWORD) {
-        redisStoreObject.pass = process.env.REDIS_PASSWORD
+        redisClientObject.password = process.env.REDIS_PASSWORD
     }
 }
+const redisClient = redis.createClient(redisClientObject);
 
 const sessionObject = {
     secret: process.env.SESSION_SECRET,
     name: process.env.COOKIE_NAME,
-    store: new redisStore(redisStoreObject),
-    saveUninitialized: true,
+    store: new redisStore({client: redisClient}),
+    saveUninitialized: false,
     resave: false,
     cookie: {}
 };
