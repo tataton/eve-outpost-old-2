@@ -13,17 +13,17 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const redisStoreObject = process.env.REDIS_URL
-    ?   {
-            url: process.env.REDIS_URL,
-            client: redisClient,
-            logErrors: true
-        }
-    :   {
-            host: process.env.REDIS_HOST,
-            port: parseInt(process.env.REDIS_PORT, 10),
-            client: redisClient
-        };
+const redisStoreObject = {client: redisClient};
+if (process.env.REDIS_URL) {
+    const redisURLparse = require('./server/services/service-redisurlparse');
+    Object.assign(redisStoreObject, redisURLparse(process.env.REDIS_URL))
+} else {
+    redisStoreObject.host = process.env.REDIS_HOST;
+    redisStoreObject.port = process.env.REDIS_PORT;
+    if (process.env.REDIS_PASSWORD) {
+        redisStoreObject.pass = process.env.REDIS_PASSWORD
+    }
+}
 
 const sessionObject = {
     secret: process.env.SESSION_SECRET,
