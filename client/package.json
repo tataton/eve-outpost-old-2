@@ -20,6 +20,9 @@
   "proxy": {
     "/auth": {
       "target": "http://localhost:5000"
+    },
+    "/popup": {
+      "target": "http://localhost:5000"
     }
   }
 }

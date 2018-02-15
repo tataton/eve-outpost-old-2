@@ -6,6 +6,15 @@ import logo from '../../images/logo.png';
 
 const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, loggedInCharacterID}) => {
 
+    const onEVEAuthClick = () => {
+        // Still need to create popup window html, set server
+        // route to deliver this.
+        const authURL = '/auth/read/login';
+        const windowName = 'EVE_SSO_login';
+        const windowSpecs = 'width=400,height=500';
+        window.open(authURL, windowName, windowSpecs);
+    }
+
     const rightMenuItems = () => {
         if (!isLoadingCharacter && !isLoggedIn) {
             return (
@@ -13,8 +22,8 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
                     <Image
                         src={loginButton}
                         size='small'
-                        as='a'
-                        href='/auth/read/login'
+                        as='button'
+                        onClick={onEVEAuthClick}
                     />
                 </Menu.Item>
             )

@@ -25,6 +25,8 @@ app.use(passport.session());
 /** ---------- ROUTES ---------- **/
 const auth = require('./server/routes/route-auth');
 app.use('/auth', auth);
+const popup = require('./server/routes/route-popup');
+app.use('/popup', popup);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
