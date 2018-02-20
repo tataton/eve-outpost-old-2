@@ -1,7 +1,7 @@
 {
   "name": "heroku-test",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
@@ -18,7 +18,7 @@
     "sequelize": "^4.22.6"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "engines": {
