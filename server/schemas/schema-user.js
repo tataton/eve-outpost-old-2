@@ -15,21 +15,28 @@ const userSchema = {
         type: Sequelize.STRING,
         allowNull: false
     },
-    apiAccess: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
+    readAccessToken: {
+        type: Sequelize.STRING
     },
-    accessToken: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    accessExpires: {
+    readAccessExpires: {
         type: Sequelize.DATE,
-        allowNull: false,
         validate: {isDate: true}
     },
-    refreshToken: {
-        type: Sequelize.STRING,
+    readRefreshToken: {
+        type: Sequelize.STRING
+    },
+    writeAccessToken: {
+        type: Sequelize.STRING
+    },
+    writeAccessExpires: {
+        type: Sequelize.DATE,
+        validate: {isDate: true}
+    },
+    writeRefreshToken: {
+        type: Sequelize.STRING
+    },
+    defaultMarket: {
+        type: Sequelize.BIGINT,
         allowNull: true
     }
 };

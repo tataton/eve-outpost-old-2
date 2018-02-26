@@ -12,6 +12,8 @@ const User = db.define('user', userSchema);
 const mapRegion = db.define('mapRegion', mapRegionSchema, {timestamps: false});
 const mapSolarSystem = db.define('mapSolarSystem', mapSolarSystemSchema, {timestamps: false});
 
+// Initialize table or column, if it doesn't exist.
 db.sync();
 
+// Export each database model as needed.
 module.exports.User = User;

@@ -19,12 +19,12 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
         if (!isLoadingCharacter && !isLoggedIn) {
             return (
                 <Menu.Item position='right'>
-                    <Image
-                        src={loginButton}
-                        size='small'
-                        as='button'
-                        onClick={onEVEAuthClick}
-                    />
+                    <Button onClick={onEVEAuthClick}>
+                        <Image
+                            src={loginButton}
+                            size='small'
+                        />
+                    </Button>
                 </Menu.Item>
             )
         } else if (!isLoadingCharacter && isLoggedIn) {

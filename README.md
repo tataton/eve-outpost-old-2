@@ -98,3 +98,17 @@ Deployment to Heroku requires installing the Heroku CLI, globally (`npm install 
 * Still in Terminal, `git push heroku master` to deploy. This will not only mirror the repo, it will also initiate `npm install` and `npm start` on the heroku server. Watch Terminal and the Heroku Dashboard for error messages.
 
 * Navigate your browser to the appropriate address at herokuapp.com.
+
+
+### Searching for structures that a player can access
+
+By system:
+1. Use GET /characters/{character_id}/search/, entering "structure" and searching for the system as a string. This will give you an array of structure_ids for all player-accessible structures. Need authorization scope `esi-search.search_structures.v1`.
+
+GET
+https://esi.tech.ccp.is/latest/characters/{character_id}/search/?categories=structure&datasource=tranquility&language=en-us&search={system_name}
+HEADERS
+"accept: application/json"
+"authorization: Bearer {access_token}"
+
+2. One by one, GET /universe/structures/{structure_id}/ for name. Need authorization scope `esi-universe.read_structures.v1`.
