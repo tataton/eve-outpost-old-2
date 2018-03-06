@@ -7,13 +7,18 @@ const db = require('../modules/module-sequelize');
 const userSchema = require('../schemas/schema-user');
 const mapRegionSchema = require('../schemas/schema-mapRegion');
 const mapSolarSystemSchema = require('../schemas/schema-mapSolarSystem');
+const staStationSchema = require('../schemas/schema-staStation');
+const publicStructureSchema = require('../schemas/schema-publicStructure');
 
 const User = db.define('user', userSchema);
-const mapRegion = db.define('mapRegion', mapRegionSchema, {timestamps: false});
-const mapSolarSystem = db.define('mapSolarSystem', mapSolarSystemSchema, {timestamps: false});
+const Region = db.define('mapRegion', mapRegionSchema, {timestamps: false});
+const SolarSystem = db.define('mapSolarSystem', mapSolarSystemSchema, {timestamps: false});
+const Station = db.define('staStation', staStationSchema, {timestamps: false});
+const PublicStructure = db.define('publicStructure', publicStructureSchema, {timestamps: false});
 
 // Initialize table or column, if it doesn't exist.
 db.sync();
 
 // Export each database model as needed.
 module.exports.User = User;
+module.exports.PublicStructure = PublicStructure;

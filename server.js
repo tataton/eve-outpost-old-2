@@ -27,6 +27,10 @@ const auth = require('./server/routes/route-auth');
 app.use('/auth', auth);
 const popup = require('./server/routes/route-popup');
 app.use('/popup', popup);
+/*
+const market = require('./server/routes/route-market');
+app.use('/market', market);
+*/
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -46,3 +50,7 @@ app.get('*', (req, res) => {
 app.listen(process.env.PORT);
 console.log(`Server listening on port ${process.env.PORT}.`);
 
+//** ------ SCHEDULED PROCESSES ------ **/
+
+const reloadPublicStructures = require('./server/services/service-reloadpublicstructures');
+reloadPublicStructures();
