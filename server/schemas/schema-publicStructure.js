@@ -20,6 +20,10 @@ const publicStructureSchema = {
     stationName: {
         type: Sequelize.STRING(100),
         allowNull: false
+    },
+    typeID: {
+        type: Sequelize.INTEGER,
+        allowNull: false
     }
 };
 
