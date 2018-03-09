@@ -9,13 +9,9 @@ const staStationSchema = {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    constellationID: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
     regionID: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     stationName: {
         type: Sequelize.STRING(100),

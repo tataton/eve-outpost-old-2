@@ -7,11 +7,11 @@ const mapSolarSystemSchema = {
     },
     constellationID: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     regionID: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     solarSystemName: {
         type: Sequelize.STRING(100),

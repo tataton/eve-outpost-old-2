@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const publicStructureSchema = {
+const privateStructureSchema = {
     structureID: {
         type: Sequelize.BIGINT,
         primaryKey: true
@@ -27,4 +27,4 @@ const publicStructureSchema = {
     }
 };
 
-module.exports = publicStructureSchema;
+module.exports = privateStructureSchema;

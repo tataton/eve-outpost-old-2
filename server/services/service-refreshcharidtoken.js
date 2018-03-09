@@ -14,14 +14,14 @@ const refreshCharIDToken = (characterID, accessType = 'read') =>
 
     User.findOne({where: {characterID}})
         .then(foundUser => {
-            const currentDate = new Date();
-            const ageOfToken = Date.parse(currentDate) - Date.parse(foundUser[`${accessType}AccessExpires`]);
-            if (ageOfToken > 900000) {
+            const timeToExpiration = Date.parse(foundUser[`${accessType}AccessExpires`]) - Date.now();
+            if (timeToExpiration < 150000) {
+                // Less than 2.5 minutes left, or expired.
                 return requestNewAccessToken(`oauth2-${accessType}`, 
                             foundUser[`${accessType}RefreshToken`])
                         .then(newAccessToken => {
                             foundUser[`${accessType}AccessToken`] = newAccessToken;
-                            foundUser[`${accessType}AccessExpires`] = currentDate;
+                            foundUser[`${accessType}AccessExpires`] = new Date(Date.now() + 1200000);
                             foundUser.save();
                             return newAccessToken;
                         })
