@@ -53,5 +53,7 @@ console.log(`Server listening on port ${process.env.PORT}.`);
 //** ------ SCHEDULED PROCESSES ------ **/
 
 const reloadPublicStructures = require('./server/services/service-reloadpublicstructures');
-reloadPublicStructures();
+// reloadPublicStructures();
 // let timerId = setInterval(reloadPublicStructures, 86400000);
+const reloadPrivateStructures = require('./server/services/service-reloadprivatestructures');
+reloadPrivateStructures();
