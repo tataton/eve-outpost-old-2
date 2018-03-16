@@ -4,6 +4,7 @@ const app = express();
 const helmet = require('helmet');
 const passport = require('passport');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
@@ -21,15 +22,20 @@ app.use(helmet());
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 /** ---------- ROUTES ---------- **/
 const auth = require('./server/routes/route-auth');
 app.use('/auth', auth);
 const popup = require('./server/routes/route-popup');
 app.use('/popup', popup);
+const location = require('./server/routes/route-location');
+app.use('/location', location);
+const universe = require('./server/routes/route-universe');
+app.use('/universe', universe);
 /*
-const market = require('./server/routes/route-market');
-app.use('/market', market);
+const marketdata = require('./server/routes/route-marketdata');
+app.use('/marketdata', marketdata);
 */
 
 // Serve static files from the React app
@@ -52,8 +58,7 @@ console.log(`Server listening on port ${process.env.PORT}.`);
 
 //** ------ SCHEDULED PROCESSES ------ **/
 
-const reloadPublicStructures = require('./server/services/service-reloadpublicstructures');
-// reloadPublicStructures();
+// const reloadPublicStructures = require('./server/services/service-reloadpublicstructures');
 // let timerId = setInterval(reloadPublicStructures, 86400000);
-const reloadPrivateStructures = require('./server/services/service-reloadprivatestructures');
-reloadPrivateStructures();
+
+// reloadPublicStructures()

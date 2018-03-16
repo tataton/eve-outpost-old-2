@@ -6,6 +6,7 @@ const router = express.Router();
 const passport = require('../modules/module-passport');
 
 router.get('/read/login', passport.authenticate('oauth2-read'));
+
 // router.get('/write/login', passport.authenticate('oauth2-write'));
 
 router.get('/read/callback', passport.authenticate('oauth2-read', {failureRedirect: '/'}),
@@ -28,8 +29,9 @@ router.get('/getuserinfo', (req, res) => {
     if (req.isAuthenticated()) {
         res.send(
             {
-                characterID: req.session.passport.user.character.CharacterID,
-                characterName: req.session.passport.user.character.CharacterName
+                characterID: req.user.character.CharacterID,
+                characterName: req.user.character.CharacterName,
+                accessType: req.user.character.accessType
             }
         );
     } else {

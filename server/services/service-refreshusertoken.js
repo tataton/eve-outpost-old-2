@@ -19,7 +19,7 @@ const refreshUserToken = (user, accessType = 'read') => {
                     user[`${accessType}AccessToken`] = newAccessToken;
                     user[`${accessType}AccessExpires`] = new Date(Date.now() + 1200000);
                     user.save();
-                    return newAccessToken;
+                    return Promise.resolve(newAccessToken);
                 })
     } else {
         return Promise.resolve(user[`${accessType}AccessToken`]);

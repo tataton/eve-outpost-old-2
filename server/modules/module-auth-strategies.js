@@ -68,7 +68,6 @@ const updateAuth = (accessType) => ((accessToken, refreshToken, profile, cb) => 
         // Remove parts of character that we don't need to serialize,
         // to save space in Redis:
         delete character.IntellectualProperty;
-        delete character.CharacterOwnerHash;
         delete character.TokenType;
         delete character.Scopes;
         return cb(null, {character})

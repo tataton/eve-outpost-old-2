@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Market = () => {
+const Stock = () => {
     return (
         <h1>
-            Market View
+            Stock View
         </h1>
     )
 };
 
-export default Market;
+export default Stock;

@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
-import Aux from 'react-aux';
-import FixedMenu from '../FixedMenu';
+import React, { Component, Fragment } from 'react';
+import Navbar from '../Navbar';
+import StationChooser from '../StationChooser';
 import Main from '../Main';
 
 class App extends Component {
   
   constructor(props) {
     super(props);
+    this.initialCharacter = {
+      characterName: '',
+      characterID: 0,
+      accessType: null,
+      currentLocation: null
+    }
     this.state = {
       isLoadingCharacter: true,
       isLoggedIn: false,
-      loggedInCharacterName: '',
-      loggedInCharacterID: 0
+      user: this.initialCharacter
     };
     this.logOutCharacter = this.logOutCharacter.bind(this);
     this.logInCharacter = this.logInCharacter.bind(this);
@@ -21,17 +26,19 @@ class App extends Component {
     this.setState((state) => ({
       isLoadingCharacter: false,
       isLoggedIn: false,
-      loggedInCharacterName: '',
-      loggedInCharacterID: 0
+      user: this.initialCharacter
     }));
   }
 
-  logInCharacter({characterID, characterName}) {
+  logInCharacter({characterID, characterName, accessType}) {
     this.setState((state) => ({
       isLoadingCharacter: false,
       isLoggedIn: true,
-      loggedInCharacterName: characterName,
-      loggedInCharacterID: characterID
+      user: {
+        characterName,
+        characterID,
+        accessType
+      }
     }));
   }
 
@@ -46,18 +53,20 @@ class App extends Component {
 
   render() {
     return (
-      <Aux>
-        <FixedMenu
+      <Fragment>
+        <Navbar
           isLoadingCharacter={this.state.isLoadingCharacter}
           isLoggedIn={this.state.isLoggedIn}
-          loggedInCharacterName={this.state.loggedInCharacterName}
-          loggedInCharacterID={this.state.loggedInCharacterID}
+          user={this.state.user}
+        />
+        <StationChooser
+          chosenLocation={this.state.user.chosenLocation}
         />
         <Main
-          loggedInCharacterName={this.state.loggedInCharacterName}
-          loggedInCharacterID={this.state.loggedInCharacterID}
+          isLoggedIn={this.state.isLoggedIn}
+          user={this.state.user}
         />
-      </Aux>
+      </Fragment>
     );
   }
 }

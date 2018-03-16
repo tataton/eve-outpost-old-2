@@ -4,11 +4,9 @@ import { NavLink } from 'react-router-dom';
 import loginButton from '../../images/loginButton.png';
 import logo from '../../images/logo.png';
 
-const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, loggedInCharacterID}) => {
+const Navbar = ({isLoadingCharacter, isLoggedIn, user}) => {
 
     const onEVEAuthClick = () => {
-        // Still need to create popup window html, set server
-        // route to deliver this.
         const authURL = '/auth/read/login';
         const windowName = 'EVE_SSO_login';
         const windowSpecs = 'width=400,height=500';
@@ -28,7 +26,7 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
                 </Menu.Item>
             )
         } else if (!isLoadingCharacter && isLoggedIn) {
-            const imgSrc = `http://image.eveonline.com/Character/${loggedInCharacterID}_64.jpg`;
+            const imgSrc = `http://image.eveonline.com/Character/${user.characterID}_64.jpg`;
             return (
                 <Menu.Item position='right'>
                     <Image 
@@ -36,7 +34,7 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
                         size='mini'
                         style={{ marginRight: '1.5em' }}
                     />
-                    {loggedInCharacterName}
+                    {user.characterName}
                     <Button
                         as='a'
                         href='/auth/logout'
@@ -60,12 +58,15 @@ const FixedMenu = ({isLoadingCharacter, isLoggedIn, loggedInCharacterName, logge
                     />
                     EVE Outpost
                 </Menu.Item>
-                <Menu.Item as={NavLink} exact to='/'>Home</Menu.Item>
-                <Menu.Item as={NavLink} to='/market'>Market Viewer</Menu.Item>
+                <Menu.Item as={NavLink} to='/market'>MarketView</Menu.Item>
+                <Menu.Item as={NavLink} to='/hubcompare'>ShoppingList</Menu.Item>
+                <Menu.Item as={NavLink} to='/stock'>Stocker</Menu.Item>
+                <Menu.Item as={NavLink} to='/orders'>Orders</Menu.Item>
+                <Menu.Item as={NavLink} to='/blueprints'>Blueprints</Menu.Item>
                 {rightMenuItems()}
             </Menu>
         </Container>
     )
 };
 
-export default FixedMenu;
+export default Navbar;

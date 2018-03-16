@@ -5,10 +5,6 @@ const mapSolarSystemSchema = {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    constellationID: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-    },
     regionID: {
         type: Sequelize.INTEGER,
         allowNull: true
